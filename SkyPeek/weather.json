@@ -1,0 +1,13 @@
+{
+  "latitude": 12.970123,
+  "longitude": 77.56364
+  
+  "current": {
+    "time": "2026-05-23T06:45",
+    "interval": 900,
+    "temperature_2m": 30.4,
+    "relative_humidity_2m": 53,
+    "wind_speed_10m": 12.1,
+    "weather_code": 3
+  }
+}
