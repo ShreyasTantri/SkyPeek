@@ -6,9 +6,9 @@
 //
 
 struct Weather {
-    var city: String
+//    var city: String
     var temperature: Double
     var condition: WeatherCondition
     var windSpeed: Double
-    var humidity: Double
+    var humidity: Int
 }

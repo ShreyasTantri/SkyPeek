@@ -13,7 +13,7 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Welcome to My Weather App!")
         }
         .padding()
         .onAppear {
@@ -21,10 +21,10 @@ struct ContentView: View {
             do {
                 let data = try fileLoader.loadJSON()
                 let dto = try JSONDecoder().decode(WeatherResponseDTO.self, from: data)
-                // Temporary decoding verification
-                print(dto.current.temperature2M)
-                print(dto.current.relativeHumidity2M)
-                print(dto.current.weatherCode)
+                let weather = dto.current.toDomain()
+                print(weather.temperature)
+                print(weather.humidity)
+                print(weather.condition)
             } catch {
                 print(error)
             }

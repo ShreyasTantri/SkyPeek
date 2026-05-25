@@ -29,3 +29,14 @@ struct CurrentDTO: Codable {
         case weatherCode = "weather_code"
     }
 }
+
+extension CurrentDTO {
+    func toDomain() -> Weather {
+        return Weather(
+            temperature: temperature2M,
+            condition: WeatherCondition(weatherCode: weatherCode),
+            windSpeed: windSpeed10M,
+            humidity: relativeHumidity2M
+        )
+    }
+}
