@@ -29,4 +29,22 @@ enum WeatherCondition {
             self = .unknown
         }
     }
+    
+    var displayName: String {
+        switch self {
+            
+        case .sunny:
+            return "Sunny"
+        case .cloudy:
+            return "Cloudy"
+        case .rainy:
+            return "Rainy"
+        case .stormy:
+            return "Stormy"
+        case .snowy:
+            return "Snowy"
+        case .unknown:
+            return "Unknown"
+        }
+    }
 }

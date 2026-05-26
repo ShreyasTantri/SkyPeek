@@ -8,26 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var viewModel = WeatherViewModel()
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Welcome to My Weather App!")
+            switch viewModel.state {
+            case .idle:
+                EmptyView()
+            case .loading:
+                ProgressView()
+            case .loaded(let weather):
+                VStack {
+                    Text("\(weather.temperature)")
+                    Text("\(weather.humidity)")
+                    Text("\(weather.windSpeed)")
+                    Text("\(weather.condition.displayName)")
+                }
+            case .failure(let error):
+                Text("Something went wrong! \(error.localizedDescription)")
+            }
         }
         .padding()
-        .onAppear {
-            let fileLoader = LocalFileLoader()
-            do {
-                let data = try fileLoader.loadJSON()
-                let dto = try JSONDecoder().decode(WeatherResponseDTO.self, from: data)
-                let weather = dto.current.toDomain()
-                print(weather.temperature)
-                print(weather.humidity)
-                print(weather.condition)
-            } catch {
-                print(error)
-            }
+        .onAppear() {
+            viewModel.loadWeather()
         }
     }
 }
