@@ -23,12 +23,3 @@ struct LocalFileLoader {
         return data
     }
 }
-
-
-/*
- LocalFileLoader:
-     file → raw bytes (Data)
-
- JSONDecoder:
-     raw bytes → typed Swift models
- */
