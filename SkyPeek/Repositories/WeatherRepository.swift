@@ -8,10 +8,10 @@
 import Foundation
 
 final class WeatherRepository {
-    let fileLoader = LocalFileLoader()
+    let service = WeatherService()
     
-    func fetchWeather() throws -> Weather {
-        let data = try fileLoader.loadJSON()
+    func fetchWeather() async throws -> Weather {
+        let data = try await service.fetchWeatherData(latitude: 12.9719, longitude: 77.5937)
         let dto = try JSONDecoder().decode(WeatherResponseDTO.self, from: data)
         let weather = dto.current.toDomain()
         return weather

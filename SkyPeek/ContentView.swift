@@ -29,7 +29,9 @@ struct ContentView: View {
         }
         .padding()
         .onAppear() {
-            viewModel.loadWeather()
+            Task {
+                await viewModel.loadWeather()
+            }
         }
     }
 }

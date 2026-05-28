@@ -11,10 +11,10 @@ final class WeatherViewModel {
     var state: WeatherState = .idle
     let repository = WeatherRepository()
     
-    func loadWeather() {
+    func loadWeather() async {
         state = .loading
         do {
-            let weather = try repository.fetchWeather()
+            let weather = try await repository.fetchWeather()
             state = .loaded(weather)
         } catch {
             state = .failure(error)
