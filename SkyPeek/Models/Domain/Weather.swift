@@ -12,3 +12,18 @@ struct Weather {
     var windSpeed: Double
     var humidity: Int
 }
+
+extension Weather {
+    var temperatureText: String {
+        "\(temperature)ºC"
+    }
+    var windSpeedText: String {
+        "\(windSpeed)km/h"
+    }
+    var humidityText: String {
+        "\(humidity)%"
+    }
+}
+
+
+// temperature: Double   →   temperatureText: String

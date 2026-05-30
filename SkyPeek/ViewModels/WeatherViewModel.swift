@@ -14,10 +14,13 @@ final class WeatherViewModel {
     func loadWeather() async {
         state = .loading
         do {
+            print("Loading weather...")
             let weather = try await repository.fetchWeather()
+            print(weather)
             state = .loaded(weather)
         } catch {
             state = .failure(error)
+            print(error)
         }
     }
 }

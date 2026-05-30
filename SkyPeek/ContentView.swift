@@ -18,9 +18,9 @@ struct ContentView: View {
                 ProgressView()
             case .loaded(let weather):
                 VStack {
-                    Text("\(weather.temperature)")
-                    Text("\(weather.humidity)")
-                    Text("\(weather.windSpeed)")
+                    Text("\(weather.temperatureText)")
+                    Text("\(weather.humidityText)")
+                    Text("\(weather.windSpeedText)")
                     Text("\(weather.condition.displayName)")
                 }
             case .failure(let error):
