@@ -6,7 +6,7 @@
 //
 
 struct Weather {
-//    var city: String
+    var city: String
     var temperature: Double
     var condition: WeatherCondition
     var windSpeed: Double
@@ -24,6 +24,3 @@ extension Weather {
         "\(humidity)%"
     }
 }
-
-
-// temperature: Double   →   temperatureText: String

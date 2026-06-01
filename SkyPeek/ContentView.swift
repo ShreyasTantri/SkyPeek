@@ -17,14 +17,39 @@ struct ContentView: View {
             case .loading:
                 ProgressView()
             case .loaded(let weather):
-                VStack {
-                    Text("\(weather.temperatureText)")
-                    Text("\(weather.humidityText)")
-                    Text("\(weather.windSpeedText)")
-                    Text("\(weather.condition.displayName)")
+                VStack(spacing: 12) {
+                    Text(weather.city)
+                        .font(.title3)
+                        .foregroundStyle(.secondary)
+                    
+                    Text(weather.temperatureText)
+                        .font(.largeTitle)
+//                        .font(.system(size: 44, weight: .semibold, design: .rounded))
+                        
+                    Text(weather.condition.displayName)
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                    
+                    HStack {
+                        Text("Humidity: \(weather.humidityText)")
+                            .font(.footnote)
+                        
+                        Spacer()
+                        
+                        Text("Wind speed: \(weather.windSpeedText)")
+                            .font(.footnote)
+                    }
+                    
                 }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(.thinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                
             case .failure(let error):
                 Text("Something went wrong! \(error.localizedDescription)")
+                    .foregroundStyle(.red)
+                    .multilineTextAlignment(.center)
             }
         }
         .padding()
@@ -36,6 +61,6 @@ struct ContentView: View {
     }
 }
 
-//#Preview {
-//    ContentView()
-//}
+#Preview {
+    ContentView()
+}

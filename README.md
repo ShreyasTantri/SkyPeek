@@ -10,22 +10,42 @@ Current architecture direction:
 
 - MVVM
 - DTO-based decoding
-- Repository pattern (planned)
-- Local JSON loading before live API integration
+- Service layer for API communication
+- Repository pattern for data orchestration
+- Local JSON loading for sample data
+- Live weather API integration
 
-The focus is understanding data flow and architecture before adding networking complexity.
+The focus is understanding data flow, layering, and state-driven UI.
 
 ---
 
 # Data Flow
 
+## Local sample flow
 weather.json  
 ↓  
-Data (Handled by LocalFileLoader)  
+Data (handled by LocalFileLoader)  
 ↓  
-DTO (Decoded using JSONDecoder)  
+DTO (decoded using JSONDecoder)  
 ↓  
 Domain Model  
+↓  
+ViewModel  
+↓  
+SwiftUI View
+
+## Live API flow
+Open-Meteo API  
+↓  
+URLSession  
+↓  
+Data  
+↓  
+DTO  
+↓  
+Domain Model  
+↓  
+Repository  
 ↓  
 ViewModel  
 ↓  
@@ -66,26 +86,53 @@ DTOs help isolate backend structure from app logic and UI.
 
 ---
 
+# Repository and Service Responsibilities
+
+## Service
+Responsible for talking to the API and returning raw data.
+
+## Repository
+Responsible for orchestrating data flow and returning domain models to the ViewModel.
+
+This keeps the UI layer independent from transport details.
+
+---
+
 # Current Progress
 
-Completed:
-- Weather DTO setup
-- Local JSON setup
-- LocalFileLoader implementation
-- Initial architecture planning
+Implemented:
 
-Next Steps:
-- Decode JSON into DTO
-- Map DTO → Domain Model
-- Create ViewModel state handling
-- Build SwiftUI screen
+- Weather DTO setup
+- Local JSON loading
+- LocalFileLoader
+- DTO decoding with JSONDecoder
+- DTO → Domain Model mapping
+- WeatherCondition enum mapping
+- Weather domain model
+- Display formatting helpers
+- WeatherViewModel
+- State-driven UI (`idle`, `loading`, `loaded`, `failure`)
+- Repository layer
+- Service layer
+- Open-Meteo API integration
+- Async/await networking
+- Loading and failure handling
+- Basic weather card UI
 
 ---
 
 # Key Learnings
 
-- Codable ignores unmapped JSON fields
-- DTOs should mirror API structure
-- `JSONDecoder` converts Data → Swift objects
-- File loading and decoding should remain separate responsibilities
-- Prefer immutable (`let`) properties unless mutation is required
+- DTOs and domain models should have separate responsibilities
+- Domain models should not expose raw API structures
+- Repository acts as the boundary between data sources and UI
+- Async/await simplifies asynchronous networking code
+- SwiftUI views should react to state changes
+- UI formatting logic can be separated using computed properties
+- Weather codes can be mapped into strongly typed enums
+
+---
+
+# Notes
+
+This app is being built as a learning project to understand architecture, SwiftUI state flow, networking, and model separation.

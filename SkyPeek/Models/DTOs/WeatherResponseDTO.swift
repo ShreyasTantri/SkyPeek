@@ -33,7 +33,7 @@ struct CurrentDTO: Codable {
 extension CurrentDTO {
     func toDomain() -> Weather {
         return Weather(
-            temperature: temperature2M,
+            city: "Bangalore", temperature: temperature2M,
             condition: WeatherCondition(weatherCode: weatherCode),
             windSpeed: windSpeed10M,
             humidity: relativeHumidity2M
